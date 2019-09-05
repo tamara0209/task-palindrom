@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+    <title>NodeJS "Palindrom" by TS </title>
+  </head>
+  <body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <hr>
+                <h3>Check:</h3>
+
+                <form id="id_form" autocomplete="off">
+                    <label for="id_string">Input world or sentenses:</label>
+                    <input type="text" class="form-control" id="id_string" placeholder="Input">
+                    <hr>
+                    <input type="submit" id="id_result" placeholder="submit">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script type="text/javascript">
+        var form = document.getElementById("id_form")
+        var input = document.getElementById("id_string");
+        form.addEventListener('submit', e => e.preventDefault());
+        form.addEventListener('submit', () => fetch());
+
+        var in_result = document.getElementById('id_result');
+
+        function fetch() {
+            let string = input.value;
+
+            isPalindrome(string, alertMsg);
+        }
+
+        function alertMsg(result) {
+            alert(result.status ? "The word is a palindrome" : 'The word is not a palindrome');
+        }
+
+        function isPalindrome (string, alertMsg) {
+            response = $.ajax({
+                type: 'POST',
+                url: "/palindrome",
+                timeout: 5000,
+                cache: false,
+                error: e => {console.log(e);},
+                success: s => {alertMsg(s);},
+                data: {
+                    'string': string
+                }
+            });
+        }
+    </script>
+
+  </body>
+</html>
